@@ -19,6 +19,19 @@ Shader "Unlit/Skybox"
         // Offsets the start of the top color in the y-axis
         _TopOffset("Top offset", float) = 0
         
+        [Header(Clouds)]
+        [HDR]_CloudsColor("Clouds color", Color) = (1,1,1,1)
+        _CloudsTexture("Clouds texture", 2D) = "black" {}
+        _CloudsThreshold("Clouds threshold", Range(0.0, 1.0)) = 0
+        _CloudsSmoothness("Clouds smoothness", Range(0.0, 1.0)) = 0.1
+        _SunCloudsIntensity("Sun behind clouds intensity", Range(0.0, 1.0)) = 0
+        _PanningSpeedX("Panning speed X", float) = 0
+        _PanningSpeedY("Panning speed Y", float) = 0
+        
+        [Header(Sun)] 
+        _SunSize("Sun size", Range(0.0, 1.0)) = 1
+        [HDR]_SunColor("Sun color", color) = (1,1,1,1)
+        
     }
     SubShader
     {
@@ -58,6 +71,18 @@ Shader "Unlit/Skybox"
             float _TopSmoothness;
             float _TopOffset;
 
+            sampler2D _CloudsTexture;
+            float4 _CloudsTexture_ST; // scale of the texture
+            fixed4 _CloudsColor;
+            float _CloudsSmoothness;
+            float _CloudsThreshold;
+            float _SunCloudIntensity;
+            float _PanningSpeedX;
+            float _PanningSpeedY;
+            
+            fixed4 _SunColor;
+            float _SunSize;
+
             // only need a simple vert shader;v calculates the clip position and passes the UVs to the v2_f
             v2_f vert (appdata v)
             {
@@ -77,6 +102,26 @@ Shader "Unlit/Skybox"
                 float topThreshold = smoothstep(0.5, 1.0 - (1.0 - _TopSmoothness) / 2.0 , i.uv.y - _TopOffset);
                 fixed4 col = lerp(_ColorBottom, _ColorMiddle, middleThreshold);
                 col = lerp(col, _ColorTop, topThreshold);
+
+                float cloudsThreshold = i.uv.y - _CloudsThreshold;
+                float cloudsTex = tex2D(_CloudsTexture, uv * _CloudsTexture_ST.xy + _CloudsTexture_ST.zw + float2(_PanningSpeedX, _PanningSpeedY) * _Time.y);
+                float clouds = smoothstep(cloudsThreshold, cloudsThreshold + _CloudsSmoothness, cloudsTex);
+
+                float sunSDF = distance(i.uv.xyz, _WorldSpaceLightPos0);
+                float sun = max(clouds * _CloudsColor.a, smoothstep(0, _SunSize, sunSDF));
+
+                float cloudShading = smoothstep(cloudsThreshold, cloudsThreshold + _CloudsSmoothness + 0.1, cloudsTex) -
+                                     smoothstep(cloudsThreshold + _CloudsSmoothness + 0.1, cloudsThreshold + _CloudsSmoothness + 0.4, cloudsTex);
+                clouds = lerp(clouds, cloudShading, 0.5) * middleThreshold * _CloudsColor.a;
+
+                float silverLining = (smoothstep(cloudsThreshold, cloudsThreshold + _CloudsSmoothness, cloudsTex)
+                                    - smoothstep(cloudsThreshold + 0.02, cloudsThreshold + _CloudsSmoothness + 0.02, cloudsTex));
+                silverLining *=  smoothstep(_SunSize * 3.0, 0.0, sunSDF) * _CloudsColor.a;
+                
+                col = lerp(_SunColor, col, sun);
+                fixed4 cloudsCol = lerp(_CloudsColor, _CloudsColor + _SunColor, cloudShading * smoothstep(0.3, 0.0, sunSDF) * _SunCloudIntensity);
+                col = lerp(col, cloudsCol, clouds);
+                col += silverLining * _SunColor;
                 
                 return col;
             }

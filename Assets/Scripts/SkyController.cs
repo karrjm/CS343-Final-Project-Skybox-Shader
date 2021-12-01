@@ -9,6 +9,25 @@ public class SkyController : MonoBehaviour
     [GradientUsage(true)] public Gradient middleColor;
     [GradientUsage(true)] public Gradient bottomColor;
 
+    [Header("Sun color")]
+    public bool overrideSunColor;
+    [GradientUsage(true)]
+    public Gradient sunColor;
+ 
+    [Header("Sun light color")]
+    public bool overrideLightColor;
+    public Gradient lightColor;
+    
+    [Header("Ambient sky color")]
+    public bool overrideAmbientSkyColor;
+    [GradientUsage(true)]
+    public Gradient ambientSkyColor;
+    
+    [Header("Clouds color")]
+    public bool overrideCloudsColor;
+    [GradientUsage(true)]
+    public Gradient cloudsColor;
+    
     [Header("Debug scrub")] public bool useScrub;
     [Range(0.0f, 1.0f)] public float scrub;
 
@@ -57,6 +76,24 @@ public class SkyController : MonoBehaviour
             SkyMaterial.SetColor("_ColorTop", topColor.Evaluate(position));
             SkyMaterial.SetColor("_ColorMiddle", middleColor.Evaluate(position));
             SkyMaterial.SetColor("_ColorBottom", bottomColor.Evaluate(position));
+        }
+        if (overrideSunColor) {
+            SkyMaterial.SetColor("_SunColor", sunColor.Evaluate(position));
+        }
+        if (overrideLightColor) {
+            Sun.color = lightColor.Evaluate(position);
+        }
+        if (overrideAmbientSkyColor) {
+            if (RenderSettings.ambientMode == UnityEngine.Rendering.AmbientMode.Trilight) {
+                RenderSettings.ambientSkyColor = topColor.Evaluate(position);
+                RenderSettings.ambientEquatorColor = middleColor.Evaluate(position);
+                RenderSettings.ambientGroundColor = bottomColor.Evaluate(position);
+            } else if (RenderSettings.ambientMode == UnityEngine.Rendering.AmbientMode.Flat) {
+                RenderSettings.ambientSkyColor = ambientSkyColor.Evaluate(position);
+            }
+        }
+        if (overrideCloudsColor) {
+            SkyMaterial.SetColor("_CloudsColor", cloudsColor.Evaluate(position));
         }
     }
 }
