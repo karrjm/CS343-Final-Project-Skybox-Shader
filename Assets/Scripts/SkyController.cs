@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 [RequireComponent(typeof(Light))]
 public class SkyController : MonoBehaviour
 {
@@ -62,6 +62,10 @@ public class SkyController : MonoBehaviour
             var pos = Vector3.Dot(Sun.transform.forward.normalized, Vector3.up) * 0.5f + 0.5f;
             UpdateGradients(pos);
         }
+
+        var sunTransform = Sun.transform;
+
+        Sun.transform.Rotate(sunTransform.right, 1f);
     }
 
     public void OnValidate()
