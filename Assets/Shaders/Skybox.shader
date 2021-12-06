@@ -136,7 +136,7 @@ Shader "Unlit/Skybox"
 
                 // calc shape of the moon using inverted worldspace position of the main directional light
                 float moonSDF = distance(i.uv.xyz, -_WorldSpaceLightPos0);
-                float moonPhaseSDF = distance(i.uv.xyz - float3(0.0, 0.0, 0.1) * _MoonPhase, -_WorldSpaceLightPos0);
+                float moonPhaseSDF = distance(i.uv.xyz - float3(0.1, 0.0, 0.0) * _MoonPhase, -_WorldSpaceLightPos0);
                 float moon = step(moonSDF, _MoonSize);
                 moon -= step(moonPhaseSDF, _MoonSize);
                 moon = saturate(moon * -_WorldSpaceLightPos0.y - clouds);
