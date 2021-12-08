@@ -100,12 +100,12 @@ Material:
     m_Colors:
     - _CloudsColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorBottom: {r: 0.8264483, g: 0.8264483, b: 0.8264483, a: 1}
-    - _ColorMiddle: {r: 0.50288606, g: 0.5791181, b: 0.8264483, a: 1}
-    - _ColorTop: {r: 0, g: 0, b: 0.8264483, a: 1}
+    - _ColorBottom: {r: 0.0842852, g: 0.0842852, b: 0.0842852, a: 1}
+    - _ColorMiddle: {r: 0.051286757, g: 0.05906129, b: 0.0842852, a: 1}
+    - _ColorTop: {r: 0, g: 0, b: 0.0842852, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MoonColor: {r: 1.4980392, g: 1.4980392, b: 1.4980392, a: 1}
-    - _SunColor: {r: 3.9156063, g: 2.4501762, b: 0, a: 1}
+    - _SunColor: {r: 3.5547113, g: 0.24988079, b: 0, a: 1}
     - color_bottom: {r: 1, g: 0.45024246, b: 0.11697778, a: 1}
     - color_middle: {r: 0.48011285, g: 0.11697778, b: 1, a: 1}
     - color_top: {r: 0.11697778, g: 0.11697778, b: 1, a: 1}
