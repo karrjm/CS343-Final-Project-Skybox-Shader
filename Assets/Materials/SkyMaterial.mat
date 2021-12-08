@@ -70,7 +70,7 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _CloudsSmoothness: 0.25
-    - _CloudsThreshold: 0.48
+    - _CloudsThreshold: 0.27
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -91,7 +91,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _StarsIntensity: 1
-    - _SunCloudsIntensity: 1
+    - _SunCloudsIntensity: 0.25
     - _SunSize: 0.33
     - _TopOffset: 0
     - _TopSmoothness: 1
@@ -100,12 +100,12 @@ Material:
     m_Colors:
     - _CloudsColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorBottom: {r: 0.55451906, g: 0.55451906, b: 0.55451906, a: 1}
-    - _ColorMiddle: {r: 0.33741966, g: 0.38856876, b: 0.55451906, a: 1}
-    - _ColorTop: {r: 0, g: 0, b: 0.55451906, a: 1}
+    - _ColorBottom: {r: 0.8264483, g: 0.8264483, b: 0.8264483, a: 1}
+    - _ColorMiddle: {r: 0.50288606, g: 0.5791181, b: 0.8264483, a: 1}
+    - _ColorTop: {r: 0, g: 0, b: 0.8264483, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MoonColor: {r: 1.4980392, g: 1.4980392, b: 1.4980392, a: 1}
-    - _SunColor: {r: 3.783374, g: 1.643986, b: 0, a: 1}
+    - _SunColor: {r: 3.9156063, g: 2.4501762, b: 0, a: 1}
     - color_bottom: {r: 1, g: 0.45024246, b: 0.11697778, a: 1}
     - color_middle: {r: 0.48011285, g: 0.11697778, b: 1, a: 1}
     - color_top: {r: 0.11697778, g: 0.11697778, b: 1, a: 1}
