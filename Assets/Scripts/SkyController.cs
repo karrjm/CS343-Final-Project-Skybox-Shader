@@ -65,7 +65,7 @@ public class SkyController : MonoBehaviour
 
         var sunTransform = Sun.transform;
 
-        Sun.transform.Rotate(sunTransform.right, 1f);
+        Sun.transform.Rotate(sunTransform.right, 0.25f);
     }
 
     public void OnValidate()

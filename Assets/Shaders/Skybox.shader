@@ -150,13 +150,16 @@ Shader "Unlit/Skybox"
                 // silver lining when sun is behind clouds
                 float silverLining = (smoothstep(cloudsThreshold, cloudsThreshold + _CloudsSmoothness, cloudsTex)
                                     - smoothstep(cloudsThreshold + 0.02, cloudsThreshold + _CloudsSmoothness + 0.02, cloudsTex));
-                silverLining *=  smoothstep(_SunSize * 3.0, 0.0, sunSDF) * _CloudsColor.a;
+                float sunSilverLining = silverLining * smoothstep(_SunSize * 3.0, 0.0, sunSDF) * _CloudsColor.a;
+                float moonSilverLining = silverLining * smoothstep(_MoonSize * 3.0, 0.0, moonSDF) * _CloudsColor.a;
+                
 
                 // put all the colors together
                 col = lerp(_SunColor, col, sun);
                 fixed4 cloudsCol = lerp(_CloudsColor, _CloudsColor + _SunColor, cloudShading * smoothstep(0.3, 0.0, sunSDF) * _SunCloudIntensity);
                 col = lerp(col, cloudsCol, clouds);
-                col += silverLining * _SunColor;
+                col += sunSilverLining * _SunColor;
+                col += moonSilverLining * _MoonColor;
                 col = lerp(col, _MoonColor, moon);
                 col += stars;
                 
