@@ -40,6 +40,8 @@ Shader "Unlit/Skybox"
         [Header(Stars)]
         _Stars("Stars", 2D) = "black" {}
         _StarsIntensity("Stars intensity", float) = 0
+        _Noise("Noise", 2D) = "" {}
+        _GridFactor("Star grid factor", float) = 0
         
     }
     SubShader
@@ -95,6 +97,8 @@ Shader "Unlit/Skybox"
             sampler2D _Stars;
             float4 _Stars_ST;
             float _StarsIntensity;
+            sampler2D _Noise;
+            float _GridFactor;
 
             float _MoonSize;
             fixed4 _MoonColor;
@@ -124,10 +128,21 @@ Shader "Unlit/Skybox"
                 float cloudsThreshold = i.uv.y - _CloudsThreshold;
                 float cloudsTex = tex2D(_CloudsTexture, uv * _CloudsTexture_ST.xy + _CloudsTexture_ST.zw + float2(_PanningSpeedX, _PanningSpeedY) * _Time.y);
                 float clouds = smoothstep(cloudsThreshold, cloudsThreshold + _CloudsSmoothness, cloudsTex);
-
+                
                 // calc the stars that will be visible at night
-                float stars = tex2D(_Stars, (i.uv.xz / i.uv.y) * _Stars_ST.xy) * _StarsIntensity * saturate(-_WorldSpaceLightPos0.y) * (1.0 - clouds);
+                float2 starsUV = i.uv.xz / i.uv.y;
+                int starsUVGrid = floor(starsUV);
+                float starsUVRemainder = starsUV - starsUVGrid;
+                float noise = tex2D(_Noise, _GridFactor);
+                int newStarsUV = starsUVRemainder + noise;
+
+                // * _Stars_ST.xy
+                float stars = tex2D(_Stars, newStarsUV) * _StarsIntensity * saturate(-_WorldSpaceLightPos0.y) * (1.0 - clouds);
                 stars *= smoothstep(0.5,1.0,i.uv.y);
+                
+                //single star texture
+                //noise texture rgb
+                
                 
                 // calculate the shape of the sun using worldspace position of main directional light
                 float sunSDF = distance(i.uv.xyz, _WorldSpaceLightPos0);
