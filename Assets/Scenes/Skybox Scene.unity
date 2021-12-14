@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2051275492}
-  m_IndirectSpecularColor: {r: 0.3169107, g: 0.32105795, b: 0.3758222, a: 1}
+  m_IndirectSpecularColor: {r: 0.45141575, g: 0.4509544, b: 0.7547002, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -725,7 +725,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   middleColor:
     serializedVersion: 2
-    key0: {r: 0.6084906, g: 0.7007311, b: 1, a: 1}
+    key0: {r: 0.5235849, g: 0.5235849, b: 1, a: 1}
     key1: {r: 0, g: 0, b: 0, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
@@ -754,7 +754,7 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   bottomColor:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
+    key0: {r: 0.6745283, g: 0.6745283, b: 1, a: 1}
     key1: {r: 0, g: 0, b: 0, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
@@ -784,8 +784,8 @@ MonoBehaviour:
   overrideSunColor: 1
   sunColor:
     serializedVersion: 2
-    key0: {r: 4, g: 2.964706, b: 0, a: 1}
-    key1: {r: 3.5137255, g: 0, b: 0, a: 1}
+    key0: {r: 5.3403134, g: 5.3403134, b: 5.3403134, a: 1}
+    key1: {r: 4, g: 1.6313726, b: 0, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
@@ -814,8 +814,8 @@ MonoBehaviour:
   overrideLightColor: 1
   lightColor:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 0, a: 1}
-    key1: {r: 1, g: 0.098039225, b: 0, a: 1}
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 0.4725827, b: 0, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
@@ -874,7 +874,7 @@ MonoBehaviour:
   overrideCloudsColor: 0
   cloudsColor:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
+    key0: {r: 0.9622642, g: 0.9622642, b: 0.9622642, a: 1}
     key1: {r: 1, g: 1, b: 1, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}

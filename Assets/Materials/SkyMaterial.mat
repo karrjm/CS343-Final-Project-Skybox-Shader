@@ -55,6 +55,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Noise:
+        m_Texture: {fileID: 2800000, guid: b8496c1f2e4655149879cfa19f133ed4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -70,18 +74,19 @@ Material:
     m_Floats:
     - _BumpScale: 1
     - _CloudsSmoothness: 0.25
-    - _CloudsThreshold: 0.27
+    - _CloudsThreshold: 0.12
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _GridFactor: 0.4
     - _Metallic: 0
     - _MiddleOffset: 0
     - _MiddleSmoothness: 1
     - _Mode: 0
-    - _MoonPhase: 0.6
+    - _MoonPhase: 0.43
     - _MoonSize: 0.1
     - _OcclusionStrength: 1
     - _PanningSpeedX: 0.005
@@ -90,8 +95,8 @@ Material:
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
-    - _StarsIntensity: 1
-    - _SunCloudsIntensity: 0.25
+    - _StarsIntensity: 0.5
+    - _SunCloudsIntensity: 0.42
     - _SunSize: 0.33
     - _TopOffset: 0
     - _TopSmoothness: 1
@@ -100,12 +105,12 @@ Material:
     m_Colors:
     - _CloudsColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _ColorBottom: {r: 0.31267482, g: 0.31267482, b: 0.31267482, a: 1}
-    - _ColorMiddle: {r: 0.1902597, g: 0.21910098, b: 0.31267482, a: 1}
-    - _ColorTop: {r: 0, g: 0, b: 0.31267482, a: 1}
+    - _ColorBottom: {r: 0.49411196, g: 0.49411196, b: 0.73252964, a: 1}
+    - _ColorMiddle: {r: 0.38354146, g: 0.38354146, b: 0.73252964, a: 1}
+    - _ColorTop: {r: 0, g: 0, b: 0.73252964, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MoonColor: {r: 1.4980392, g: 1.4980392, b: 1.4980392, a: 1}
-    - _SunColor: {r: 3.6657712, g: 0.92698884, b: 0, a: 1}
+    - _SunColor: {r: 4.981819, g: 4.348282, b: 3.9119377, a: 1}
     - color_bottom: {r: 1, g: 0.45024246, b: 0.11697778, a: 1}
     - color_middle: {r: 0.48011285, g: 0.11697778, b: 1, a: 1}
     - color_top: {r: 0.11697778, g: 0.11697778, b: 1, a: 1}

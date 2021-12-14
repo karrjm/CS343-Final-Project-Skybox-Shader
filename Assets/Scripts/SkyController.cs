@@ -1,6 +1,6 @@
 using UnityEngine;
 
-//[ExecuteInEditMode]
+// allows control over sky's color and directional light
 [RequireComponent(typeof(Light))]
 public class SkyController : MonoBehaviour
 {
@@ -65,6 +65,7 @@ public class SkyController : MonoBehaviour
 
         var sunTransform = Sun.transform;
 
+        // rotates the sun (directional light)
         Sun.transform.Rotate(sunTransform.right, 0.25f);
     }
 

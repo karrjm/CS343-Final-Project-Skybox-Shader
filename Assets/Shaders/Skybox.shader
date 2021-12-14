@@ -20,33 +20,48 @@ Shader "Unlit/Skybox"
         _TopOffset("Top offset", float) = 0
         
         [Header(Clouds)]
+        // HDR cloud color
         [HDR]_CloudsColor("Clouds color", Color) = (1,1,1,1)
+        // noise texture used for clouds
         _CloudsTexture("Clouds texture", 2D) = "black" {}
+        // determines height which clouds will disolve
         _CloudsThreshold("Clouds threshold", Range(0.0, 1.0)) = 0
+        // the smoothness of the edge of the clouds
         _CloudsSmoothness("Clouds smoothness", Range(0.0, 1.0)) = 0.1
+        // determines the area where the sun color is applied oin the clouds
         _SunCloudsIntensity("Sun behind clouds intensity", Range(0.0, 1.0)) = 0
+        // the panning speed of the clouds, x and y
         _PanningSpeedX("Panning speed X", float) = 0
         _PanningSpeedY("Panning speed Y", float) = 0
         
         [Header(Sun)] 
+        // adjusts the size of the sun
         _SunSize("Sun size", Range(0.0, 1.0)) = 1
+        // HDR sun color
         [HDR]_SunColor("Sun color", color) = (1,1,1,1)
         
         [Header(Moon)]
+        // adjust the size of the moon
         _MoonSize("Moon size", Range(0,1)) = 0
+        // HDR moon color
         [HDR]_MoonColor("Moon color", Color) = (1,1,1,1)
+        // moon phase, this is used to get he crescent moon shape
         _MoonPhase("Moon phase", Range(0,1)) = 0
         
         [Header(Stars)]
+        // texture used for the stars.
         _Stars("Stars", 2D) = "black" {}
+        // intensity of the stars, gets multiplied with the color from the _Stars texture
         _StarsIntensity("Stars intensity", float) = 0
+        // noise used for star placement
         _Noise("Noise", 2D) = "" {}
+        // coefficient applied to grid
         _GridFactor("Star grid factor", float) = 0
         
     }
     SubShader
     {
-        // Since this is a skybox and we want it render behind everything, we have set a special render type and queue
+        // a skybox should render behind everything, so we have set a special render type and queue
         Tags { "RenderType"="Background" "Queue"="Background" "PreviewType"="Quad" }
         LOD 100
 
@@ -72,7 +87,7 @@ Shader "Unlit/Skybox"
                 float4 vertex : SV_POSITION;
             };
 
-            // redeclaration of the properties
+            // redeclaration of the properties along with "_ST" fields to adjust scaling and offset
             fixed4 _ColorTop;
             fixed4 _ColorMiddle;
             fixed4 _ColorBottom;
@@ -104,7 +119,7 @@ Shader "Unlit/Skybox"
             fixed4 _MoonColor;
             float _MoonPhase;
 
-            // only need a simple vert shader;v calculates the clip position and passes the UVs to the v2_f
+            // only need a simple vert shader; calculates the clip position and passes the UVs to the v2_f
             v2_f vert (appdata v)
             {
                 v2_f o;
@@ -128,21 +143,17 @@ Shader "Unlit/Skybox"
                 float cloudsThreshold = i.uv.y - _CloudsThreshold;
                 float cloudsTex = tex2D(_CloudsTexture, uv * _CloudsTexture_ST.xy + _CloudsTexture_ST.zw + float2(_PanningSpeedX, _PanningSpeedY) * _Time.y);
                 float clouds = smoothstep(cloudsThreshold, cloudsThreshold + _CloudsSmoothness, cloudsTex);
-                
-                // calc the stars that will be visible at night
-                float2 starsUV = i.uv.xz / i.uv.y;
+
+                // attempt at procedural stars
+                /*float2 starsUV = i.uv.xz / i.uv.y;
                 int starsUVGrid = floor(starsUV);
                 float starsUVRemainder = starsUV - starsUVGrid;
                 float noise = tex2D(_Noise, _GridFactor);
-                int newStarsUV = starsUVRemainder + noise;
-
-                // * _Stars_ST.xy
-                float stars = tex2D(_Stars, newStarsUV) * _StarsIntensity * saturate(-_WorldSpaceLightPos0.y) * (1.0 - clouds);
+                int newStarsUV = starsUVRemainder + noise;*/
+                
+                // calc the stars that will be visible at night
+                float stars = tex2D(_Stars, (i.uv.xz / i.uv.y) * _Stars_ST.xy) * _StarsIntensity * saturate(-_WorldSpaceLightPos0.y) * (1.0 - clouds);
                 stars *= smoothstep(0.5,1.0,i.uv.y);
-                
-                //single star texture
-                //noise texture rgb
-                
                 
                 // calculate the shape of the sun using worldspace position of main directional light
                 float sunSDF = distance(i.uv.xyz, _WorldSpaceLightPos0);
@@ -170,12 +181,18 @@ Shader "Unlit/Skybox"
                 
 
                 // put all the colors together
+                // sun color with lerp using sun shpae
                 col = lerp(_SunColor, col, sun);
+                // color of the clouds with shading and sun color when behind clouds
                 fixed4 cloudsCol = lerp(_CloudsColor, _CloudsColor + _SunColor, cloudShading * smoothstep(0.3, 0.0, sunSDF) * _SunCloudIntensity);
+                // add cloud color to previous color
                 col = lerp(col, cloudsCol, clouds);
+                // silver lining for both sun AND moon
                 col += sunSilverLining * _SunColor;
                 col += moonSilverLining * _MoonColor;
+                // moon color
                 col = lerp(col, _MoonColor, moon);
+                // star colors
                 col += stars;
                 
                 return col;
