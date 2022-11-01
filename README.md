@@ -5,7 +5,7 @@ Custom Skybox shader in Unity using HLSL by Jacob Karr and Isaac Moua
 # Images from our presentation
 
 ## our color palette for presentation
-![](images\image1.jpeg)
+![](CS343-Final-Project-Skybox-Shader/images/image1.jpeg)
 ## vertex shader
 ![](images\image2.png)
 ## uv & color gradient
