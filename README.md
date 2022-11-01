@@ -1,3 +1,5 @@
+Custom Skybox shader by Jacob Karr and Isaac Moua
+
 Sources:
 https://halisavakis.com/my-take-on-shaders-sky-shader/
 https://medium.com/@jannik_boysen/procedural-skybox-shader-137f6b0cb77c
