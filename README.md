@@ -5,28 +5,28 @@ Custom Skybox shader in Unity using HLSL by Jacob Karr and Isaac Moua
 # Images from our presentation
 
 ## our color palette for presentation
-![](https://github.com/karrjm/CS343-Final-Project-Skybox-Shader/images/image1.jpeg?raw=true)
+![](images/image1.jpeg)
 ## vertex shader
 ![](images/image2.png)
 ## uv & color gradient
-![](images\image3.png)
-![](images\image4.gif)
+![](images/image3.png)
+![](images/image4.gif)
 ## clouds
-![](images\image5.png)
-![](images\image6.gif)
+![](images/image5.png)
+![](images/image6.gif)
 ## stars & ghost code to make them procedural
-![](images\image7.png)
-![](images\image8.gif)
+![](images/image7.png)
+![](images/image8.gif)
 ## sun & moon
-![](images\image9.png)
-![](images\image10.gif)
-![](images\image11.gif)
+![](images/image9.png)
+![](images/image10.gif)
+![](images/image11.gif)
 ## cloud shading & silver lining (our favorite feature)
-![](images\image12.png)
-![](images\image13.gif)
+![](images/image12.png)
+![](images/image13.gif)
 ## putting it all together
-![](images\image14.png)
-![](images\image15.gif)
+![](images/image14.png)
+![](images/image15.gif)
 
 # Sources
 
